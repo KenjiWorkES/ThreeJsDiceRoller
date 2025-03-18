@@ -18,7 +18,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "paths": {
+      "three/addons/controls/*": [
+        "node_modules/@types/three/examples/jsm/controls/*"
+      ]
+    },
+    "baseUrl": "./"
   },
   "include": ["src"]
 }
