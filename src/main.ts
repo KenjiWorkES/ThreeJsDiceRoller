@@ -1,7 +1,8 @@
 import * as THREE from "three";
+import * as CANNON from "cannon-es";
 import GUI from "lil-gui";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-import { createD20, addDice, removeDice } from "./dice";
+import { createD20, addDice, removeDice, createFloor } from "./objects";
 import { createSky } from "./sky";
 import { createMainCamera } from "./camera";
 import { createSceneLights } from "./lights";
@@ -12,7 +13,13 @@ const sizes = {
 };
 
 const gui = new GUI();
+
 const scene = new THREE.Scene();
+
+const world = new CANNON.World();
+world.broadphase = new CANNON.SAPBroadphase(world);
+world.allowSleep = true;
+world.gravity.set(0, -9.82, 0);
 
 const sky = createSky();
 scene.add(sky);
@@ -30,14 +37,7 @@ createDiceButton?.addEventListener("click", () => {
 removeDiceButton?.addEventListener("click", () => removeDice(amountDiceButton));
 addDiceButton?.addEventListener("click", () => addDice(amountDiceButton));
 
-const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(2000, 2000),
-  new THREE.MeshStandardMaterial({ color: "#B7C0EE" })
-);
-
-floor.rotation.x = -Math.PI * 0.5;
-floor.receiveShadow = true;
-
+const floor = createFloor();
 scene.add(floor);
 
 const camera = createMainCamera(sizes);
@@ -46,8 +46,6 @@ scene.add(camera);
 const controls = new OrbitControls(camera, canvas);
 controls.target.set(0, 0.75, 0);
 controls.enableDamping = true;
-
-//Lights
 
 const [ambientLight, directionalLight] = createSceneLights();
 
