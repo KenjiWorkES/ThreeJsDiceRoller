@@ -2,10 +2,19 @@ import * as THREE from "three";
 import * as CANNON from "cannon-es";
 import GUI from "lil-gui";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-import { createD20, addDice, removeDice, createFloor } from "./objects";
+import {
+  createD20,
+  addDice,
+  removeDice,
+  createFloor,
+  type DicesArray,
+} from "./objects";
 import { createSky } from "./sky";
 import { createMainCamera } from "./camera";
 import { createSceneLights } from "./lights";
+//import CannonDebugger from "cannon-es-debugger";
+
+let allDices: DicesArray = [];
 
 const sizes = {
   height: window.innerHeight,
@@ -15,11 +24,10 @@ const sizes = {
 const gui = new GUI();
 
 const scene = new THREE.Scene();
-
 const world = new CANNON.World();
-world.broadphase = new CANNON.SAPBroadphase(world);
-world.allowSleep = true;
 world.gravity.set(0, -9.82, 0);
+
+//const cannonDebugger = new CannonDebugger(scene, world);
 
 const sky = createSky();
 scene.add(sky);
@@ -31,16 +39,22 @@ const amountDiceButton = document.getElementById("amount-dice");
 const addDiceButton = document.getElementById("add-dice");
 const removeDiceButton = document.getElementById("remove-dice");
 
-createDiceButton?.addEventListener("click", () => {
-  createD20(scene, amountDiceButton);
+createDiceButton?.addEventListener("click", async () => {
+  const dices = await createD20(scene, amountDiceButton, world);
+  console.log(dices);
+  allDices = dices;
 });
 removeDiceButton?.addEventListener("click", () => removeDice(amountDiceButton));
 addDiceButton?.addEventListener("click", () => addDice(amountDiceButton));
 
-const floor = createFloor();
-scene.add(floor);
+const [floorMesh, floorBody] = createFloor();
 
-const camera = createMainCamera(sizes);
+floorBody.position.y = floorMesh.position.y;
+
+scene.add(floorMesh);
+world.addBody(floorBody);
+
+const camera = createMainCamera(sizes, floorMesh.position);
 scene.add(camera);
 
 const controls = new OrbitControls(camera, canvas);
@@ -74,10 +88,28 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 renderer.render(scene, camera);
 
+const clock = new THREE.Clock();
+let oldElapsedTime = 0;
+
 const tick = () => {
+  const elapsedTime = clock.getElapsedTime();
+  const deltaTime = elapsedTime - oldElapsedTime;
+  oldElapsedTime = elapsedTime;
+
+  for (const dice of allDices) {
+    dice.mesh.position.y = dice.body.position.y;
+    dice.mesh.position.x = dice.body.position.x;
+    dice.mesh.position.z = dice.body.position.z;
+    dice.mesh.quaternion.copy(dice.body.quaternion);
+  }
+
+  //update world
+  world.step(1 / 60, deltaTime, 3);
+
   // Update controls
   controls.update();
 
+  //cannonDebugger.update();
   // Render
   renderer.render(scene, camera);
 
