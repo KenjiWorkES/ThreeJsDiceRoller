@@ -32,7 +32,9 @@ export const createD20 = (
       dice.scene.scale.setScalar(0.005);
       dice.scene.position.x = (Math.random() - 0.5) * 4;
       dice.scene.position.z = (Math.random() - 0.4) * 4;
-      dice.scene.position.y = 4;
+      dice.scene.position.y = 1.5;
+      dice.scene.castShadow = true;
+      dice.scene.receiveShadow = true;
       scene.add(dice.scene);
     });
   }

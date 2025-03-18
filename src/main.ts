@@ -4,6 +4,7 @@ import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { createD20, addDice, removeDice } from "./dice";
 import { createSky } from "./sky";
 import { createMainCamera } from "./camera";
+import { createSceneLights } from "./lights";
 
 const sizes = {
   height: window.innerHeight,
@@ -35,6 +36,7 @@ const floor = new THREE.Mesh(
 );
 
 floor.rotation.x = -Math.PI * 0.5;
+floor.receiveShadow = true;
 
 scene.add(floor);
 
@@ -45,8 +47,12 @@ const controls = new OrbitControls(camera, canvas);
 controls.target.set(0, 0.75, 0);
 controls.enableDamping = true;
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+//Lights
+
+const [ambientLight, directionalLight] = createSceneLights();
+
 scene.add(ambientLight);
+scene.add(directionalLight);
 
 window.addEventListener("resize", () => {
   sizes.width = window.innerWidth;
@@ -64,6 +70,9 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 renderer.render(scene, camera);
 
