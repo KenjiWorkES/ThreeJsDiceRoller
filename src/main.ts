@@ -2,6 +2,8 @@ import * as THREE from "three";
 import GUI from "lil-gui";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { createD20, addDice, removeDice } from "./dice";
+import { createSky } from "./sky";
+import { createMainCamera } from "./camera";
 
 const sizes = {
   height: window.innerHeight,
@@ -11,6 +13,9 @@ const sizes = {
 const gui = new GUI();
 const scene = new THREE.Scene();
 
+const sky = createSky();
+scene.add(sky);
+
 const canvas = document.getElementById("webgl-canva");
 const createDiceButton = document.getElementById("create-dice");
 const amountDiceButton = document.getElementById("amount-dice");
@@ -19,8 +24,7 @@ const addDiceButton = document.getElementById("add-dice");
 const removeDiceButton = document.getElementById("remove-dice");
 
 createDiceButton?.addEventListener("click", () => {
-  const amount = amountDiceButton?.innerHTML;
-  createD20(scene, Number(amount) || 1);
+  createD20(scene, amountDiceButton);
 });
 removeDiceButton?.addEventListener("click", () => removeDice(amountDiceButton));
 addDiceButton?.addEventListener("click", () => addDice(amountDiceButton));
@@ -34,10 +38,8 @@ floor.rotation.x = -Math.PI * 0.5;
 
 scene.add(floor);
 
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+const camera = createMainCamera(sizes);
 scene.add(camera);
-camera.position.set(1, 2, 2);
-camera.lookAt(floor.position);
 
 const controls = new OrbitControls(camera, canvas);
 controls.target.set(0, 0.75, 0);

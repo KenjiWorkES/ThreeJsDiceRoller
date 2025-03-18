@@ -21,7 +21,11 @@ export const removeDice = (amountDiceButton: HTMLElement | null) => {
   }
 };
 
-export const createD20 = (scene: THREE.Scene, amount: number) => {
+export const createD20 = (
+  scene: THREE.Scene,
+  amountDiceButton: HTMLElement | null
+) => {
+  const amount = Number(amountDiceButton?.innerHTML) || 1;
   for (let i = 0; i < amount; i++) {
     gtlfLoader.load("/d20_black/scene.gltf", (dice) => {
       console.log(dice);
