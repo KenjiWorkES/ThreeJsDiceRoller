@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import GUI from "lil-gui";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-import { createD20 } from "./dice";
+import { createD20, addDice, removeDice } from "./dice";
 
 const sizes = {
   height: window.innerHeight,
@@ -15,13 +15,18 @@ const canvas = document.getElementById("webgl-canva");
 const createDiceButton = document.getElementById("create-dice");
 const amountDiceButton = document.getElementById("amount-dice");
 
+const addDiceButton = document.getElementById("add-dice");
+const removeDiceButton = document.getElementById("remove-dice");
+
 createDiceButton?.addEventListener("click", () => {
   const amount = amountDiceButton?.innerHTML;
   createD20(scene, Number(amount) || 1);
 });
+removeDiceButton?.addEventListener("click", () => removeDice(amountDiceButton));
+addDiceButton?.addEventListener("click", () => addDice(amountDiceButton));
 
 const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(20, 20),
+  new THREE.PlaneGeometry(2000, 2000),
   new THREE.MeshStandardMaterial({ color: "#B7C0EE" })
 );
 
