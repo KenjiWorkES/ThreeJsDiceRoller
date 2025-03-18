@@ -16,8 +16,12 @@
     <div id="app">
       <canvas id="webgl-canva"></canvas>
       <div class="controls">
-        <div id="amount-dice" class="controls__amount">5</div>
-        <div id="create-dice" class="controls__create">Create Dice</div>
+        <div>
+          <button id="remove-dice" class="controls__remove">-</button>
+          <div id="amount-dice" class="controls__amount">5</div>
+          <button id="add-dice" class="controls__add">+</button>
+        </div>
+        <button id="create-dice" class="controls__create">Create Dice</button>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
