@@ -72,7 +72,7 @@ export const createD20 = async (
       result.scene.children[0].children[0].children[0].children[0].children[0];
     diceMesh.position.x = (Math.random() - 0.5) * 12;
     diceMesh.position.z = (Math.random() - 0.5) * 12;
-    diceMesh.position.y = 10;
+    diceMesh.position.y = 12;
 
     diceMesh.castShadow = true;
     diceMesh.receiveShadow = true;

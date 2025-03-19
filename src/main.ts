@@ -12,6 +12,7 @@ import {
 import { createSky } from "./sky";
 import { createMainCamera } from "./camera";
 import { createSceneLights } from "./lights";
+import { createDefaultContactMaterial } from "./physics";
 //import CannonDebugger from "cannon-es-debugger";
 
 let allDices: DicesArray = [];
@@ -21,11 +22,16 @@ const sizes = {
   width: window.innerWidth,
 };
 
-const gui = new GUI();
+const [defaultMaterial, defaultContactMaterial] =
+  createDefaultContactMaterial();
 
+const gui = new GUI();
 const scene = new THREE.Scene();
 const world = new CANNON.World();
+
 world.gravity.set(0, -9.82, 0);
+world.addContactMaterial(defaultContactMaterial);
+world.defaultContactMaterial = defaultContactMaterial;
 
 //const cannonDebugger = new CannonDebugger(scene, world);
 
@@ -40,6 +46,12 @@ const addDiceButton = document.getElementById("add-dice");
 const removeDiceButton = document.getElementById("remove-dice");
 
 createDiceButton?.addEventListener("click", async () => {
+  if (allDices.length > 0) {
+    allDices.forEach((dice) => {
+      scene.remove(dice.mesh);
+      world.removeBody(dice.body);
+    });
+  }
   const dices = await createD20(scene, amountDiceButton, world);
   console.log(dices);
   allDices = dices;

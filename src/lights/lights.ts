@@ -6,7 +6,7 @@ export const createAmbientLight = () => {
 };
 
 export const createDirectionalLight = () => {
-  const directionalLight = new THREE.DirectionalLight("#86cdff", 1);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 4);
   directionalLight.castShadow = true;
   directionalLight.position.set(3, 2, -8);
 
