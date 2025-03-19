@@ -19,7 +19,7 @@ export const createDirectionalLight = () => {
   directionalLight.shadow.camera.left = -8;
 
   directionalLight.shadow.camera.near = 1;
-  directionalLight.shadow.camera.far = 20;
+  directionalLight.shadow.camera.far = 50;
 
   return directionalLight;
 };

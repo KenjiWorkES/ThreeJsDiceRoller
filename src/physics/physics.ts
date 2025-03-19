@@ -10,7 +10,7 @@ export const createDefaultContactMaterial = (): [
     defaultMaterial,
     defaultMaterial,
     {
-      friction: 0.2,
+      friction: 0.5,
       restitution: 0.2,
     }
   );

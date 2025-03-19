@@ -13,7 +13,7 @@ import { createSky } from "./sky";
 import { createMainCamera } from "./camera";
 import { createSceneLights } from "./lights";
 import { createDefaultContactMaterial } from "./physics";
-//import CannonDebugger from "cannon-es-debugger";
+import CannonDebugger from "cannon-es-debugger";
 
 let allDices: DicesArray = [];
 
@@ -32,8 +32,7 @@ const world = new CANNON.World();
 world.gravity.set(0, -9.82, 0);
 world.addContactMaterial(defaultContactMaterial);
 world.defaultContactMaterial = defaultContactMaterial;
-
-//const cannonDebugger = new CannonDebugger(scene, world);
+const cannonDebugger = new CannonDebugger(scene, world);
 
 const sky = createSky();
 scene.add(sky);
@@ -52,16 +51,19 @@ createDiceButton?.addEventListener("click", async () => {
       world.removeBody(dice.body);
     });
   }
-  const dices = await createD20(scene, amountDiceButton, world);
-  console.log(dices);
+  const dices = await createD20(
+    scene,
+    amountDiceButton,
+    world,
+    defaultMaterial
+  );
+
   allDices = dices;
 });
 removeDiceButton?.addEventListener("click", () => removeDice(amountDiceButton));
 addDiceButton?.addEventListener("click", () => addDice(amountDiceButton));
 
 const [floorMesh, floorBody] = createFloor();
-
-floorBody.position.y = floorMesh.position.y;
 
 scene.add(floorMesh);
 world.addBody(floorBody);
@@ -121,7 +123,7 @@ const tick = () => {
   // Update controls
   controls.update();
 
-  //cannonDebugger.update();
+  cannonDebugger.update();
   // Render
   renderer.render(scene, camera);
 

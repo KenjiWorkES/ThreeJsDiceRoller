@@ -1,0 +1,11 @@
+Model Information:
+* title:	D20 dice
+* source:	https://sketchfab.com/3d-models/d20-dice-4b94308a3ada4a0da35463a1545fbc36
+* author:	CosmicWonder (https://sketchfab.com/CosmicWonder)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "D20 dice" (https://sketchfab.com/3d-models/d20-dice-4b94308a3ada4a0da35463a1545fbc36) by CosmicWonder (https://sketchfab.com/CosmicWonder) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
