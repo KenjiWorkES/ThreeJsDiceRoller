@@ -72,6 +72,13 @@ export const createD20Body = async (diceMesh: THREE.Mesh) => {
     diceBody.position
   );
 
+  diceBody.addEventListener("sleep", () => {
+    const euler = new THREE.Euler();
+    const rotation = euler.setFromQuaternion(diceMesh.quaternion);
+    const radians = rotation.x > 0 ? rotation.x : 2 * Math.PI + rotation.x;
+    console.log((radians * 180) / Math.PI);
+  });
+
   return diceBody;
 };
 
@@ -90,8 +97,8 @@ export const createD20 = async (
 
   for (let i = 0; i < amount; i++) {
     const diceClone = diceMesh.clone();
-    diceClone.position.x = (Math.random() - 0.5) * 12;
-    diceClone.position.z = (Math.random() - 0.5) * 12;
+    diceClone.position.x = (Math.random() - 0.5) * 10;
+    diceClone.position.z = (Math.random() - 0.5) * 10;
     diceClone.position.y = 12;
 
     diceClone.castShadow = true;

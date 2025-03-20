@@ -45,7 +45,7 @@ body {
 
   &__amountLabel {
     font-size: 4rem;
-    margin-right: 2rem;
+    margin-right: 1.6rem;
   }
 
   &__add,
@@ -54,6 +54,11 @@ body {
     border: none;
     font-size: 4rem;
     cursor: pointer;
+
+    &:hover {
+      color: #e4bb97;
+      transition: all 0.2s;
+    }
   }
 
   &__amount {
@@ -63,19 +68,14 @@ body {
   &__create {
     width: 100%;
     max-width: 250px;
-    letter-spacing: 2px;
-    border-radius: 8px;
     font-size: 4rem;
     font-weight: 400;
     text-shadow: 0 1px 3px #000;
     text-align: center;
     padding: 5px 0;
     background: radial-gradient(circle, #e4bb97, #e4bb97);
-    border-top: 4px ridge #1c1c1c;
-    border-left: 4px groove #1c1c1c;
-    border-right: 4px ridge #1c1c1c;
-    border-bottom: 4px groove #1c1c1c;
     box-shadow: inset 0px 0px 5px 3px rgba(1, 1, 1, 0.3);
+    transition: all 0.2s;
     cursor: pointer;
 
     &:hover {
