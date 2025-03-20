@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import * as CANNON from "cannon-es";
 import { floorAlphaTexture } from "../textures";
+import GUI from "lil-gui";
 
 const createFloorBody = () => {
   const floorShape = new CANNON.Plane();
@@ -21,7 +22,7 @@ const createFloorMesh = () => {
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(100, 100),
     new THREE.MeshStandardMaterial({
-      color: "#B7C0EE",
+      color: "#424874",
       transparent: true,
       alphaMap: floorAlphaTexture,
     })
@@ -32,8 +33,11 @@ const createFloorMesh = () => {
   return floor;
 };
 
-export const createFloor = (): [THREE.Mesh, CANNON.Body] => {
+export const createFloor = (gui: GUI): [THREE.Mesh, CANNON.Body] => {
   const floorBody = createFloorBody();
   const floorMesh = createFloorMesh();
+
+  const folder = gui.addFolder("Floor");
+  folder.addColor(floorMesh.material, "color");
   return [floorMesh, floorBody];
 };

@@ -25,7 +25,9 @@ const sizes = {
 const [defaultMaterial, defaultContactMaterial] =
   createDefaultContactMaterial();
 
-const gui = new GUI();
+const gui = new GUI({
+  width: 400,
+});
 const scene = new THREE.Scene();
 const world = new CANNON.World();
 
@@ -62,12 +64,12 @@ createDiceButton?.addEventListener("click", async () => {
 removeDiceButton?.addEventListener("click", () => removeDice(amountDiceButton));
 addDiceButton?.addEventListener("click", () => addDice(amountDiceButton));
 
-const [floorMesh, floorBody] = createFloor();
+const [floorMesh, floorBody] = createFloor(gui);
 
 scene.add(floorMesh);
 world.addBody(floorBody);
 
-const camera = createMainCamera(sizes, floorMesh.position);
+const camera = createMainCamera(sizes, gui);
 scene.add(camera);
 
 const controls = new OrbitControls(camera, canvas);

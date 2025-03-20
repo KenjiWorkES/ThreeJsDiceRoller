@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "sass-embedded": "^1.86.0",
     "typescript": "~5.7.2",
     "vite": "^6.2.0"
   },
@@ -19,6 +20,7 @@
     "cannon-utils": "^0.1.4",
     "gsap": "^3.12.7",
     "lil-gui": "^0.20.0",
+    "scss": "^0.2.4",
     "three": "^0.174.0"
   }
 }
