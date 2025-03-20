@@ -16,15 +16,19 @@
   <body>
     <div id="app">
       <canvas id="webgl-canva"></canvas>
-      <div class="controls">
-        <h1 class="controls__title">RPG Dice Roller</h1>
-        <div class="controls__quantity">
-          <h1 class="controls__amountLabel">Amount:</h1>
-          <button id="remove-dice" class="controls__remove">-</button>
-          <div id="amount-dice" class="controls__amount">1</div>
-          <button id="add-dice" class="controls__add">+</button>
+      <div class="content">
+        <div class="controls">
+          <h1 class="controls__title">RPG Dice Roller</h1>
+          <div class="controls__quantity">
+            <h1 class="controls__amountLabel">Amount:</h1>
+            <button id="remove-dice" class="controls__remove">-</button>
+            <div id="amount-dice" class="controls__amount">1</div>
+            <button id="add-dice" class="controls__add">+</button>
+          </div>
+          <button id="create-dice" class="controls__create btn-home">
+            Roll
+          </button>
         </div>
-        <button id="create-dice" class="controls__create btn-home">Roll</button>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
