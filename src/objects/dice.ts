@@ -84,7 +84,7 @@ export const createD20 = async (
   const amount = Number(amountDiceButton?.innerHTML) || 1;
   let dices: { body: CANNON.Body; mesh: THREE.Mesh }[] = [];
 
-  const result = await gtlfLoader.loadAsync("/d20_black/scene.gltf");
+  const result = await gtlfLoader.loadAsync("/models/d20_black/scene.gltf");
   const diceMesh =
     result.scene.children[0].children[0].children[0].children[0].children[0];
 
