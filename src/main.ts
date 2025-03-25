@@ -2,17 +2,12 @@ import * as THREE from "three";
 import * as CANNON from "cannon-es";
 import GUI from "lil-gui";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-import {
-  createD20,
-  addDice,
-  removeDice,
-  createFloor,
-  type DicesArray,
-} from "./objects";
+import { createDices, createFloor, type DicesArray } from "./objects";
 import { createSky } from "./sky";
 import { createMainCamera } from "./camera";
 import { createSceneLights } from "./lights";
 import { createDefaultContactMaterial } from "./physics";
+import CannonDebugger from "cannon-es-debugger";
 
 let allDices: DicesArray = [];
 
@@ -36,6 +31,7 @@ if (window.location.hash) {
 
 const scene = new THREE.Scene();
 const world = new CANNON.World();
+const cannonDebugger = new CannonDebugger(scene, world);
 
 world.gravity.set(0, -9.82, 0);
 world.addContactMaterial(defaultContactMaterial);
@@ -47,29 +43,27 @@ scene.add(sky);
 
 const canvas = document.getElementById("webgl-canva");
 const createDiceButton = document.getElementById("create-dice");
-const amountDiceButton = document.getElementById("amount-dice");
-
-const addDiceButton = document.getElementById("add-dice");
-const removeDiceButton = document.getElementById("remove-dice");
 
 createDiceButton?.addEventListener("click", async () => {
+  const amount = document.querySelector(
+    'input[name="amount"]:checked'
+  ) as HTMLInputElement;
+
   if (allDices.length > 0) {
     allDices.forEach((dice) => {
       scene.remove(dice.mesh);
       world.removeBody(dice.body);
     });
   }
-  const dices = await createD20(
+  const dices = await createDices(
     scene,
-    amountDiceButton,
+    Number(amount.value),
     world,
     defaultMaterial
   );
 
   allDices = dices;
 });
-removeDiceButton?.addEventListener("click", () => removeDice(amountDiceButton));
-addDiceButton?.addEventListener("click", () => addDice(amountDiceButton));
 
 const [floorMesh, floorBody] = createFloor(gui);
 
@@ -130,6 +124,7 @@ const tick = () => {
 
   // Update controls
   controls.update();
+  cannonDebugger.update();
 
   // Render
   renderer.render(scene, camera);

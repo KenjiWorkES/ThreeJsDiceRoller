@@ -2,12 +2,12 @@ import GUI from "lil-gui";
 import * as THREE from "three";
 
 export const createAmbientLight = () => {
-  const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 5);
   return ambientLight;
 };
 
 export const createDirectionalLight = (gui: GUI) => {
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 4);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 15);
   directionalLight.castShadow = true;
   directionalLight.position.set(-4.9, 13.9, -10.7);
 

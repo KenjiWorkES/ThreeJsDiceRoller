@@ -6,7 +6,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="./css/style.css"
+      href="./scss/index.scss"
       media="screen"
     />
     <link href="https://fonts.cdnfonts.com/css/draconis" rel="stylesheet" />
@@ -19,11 +19,193 @@
       <div class="content">
         <div class="controls">
           <h1 class="controls__title">RPG Dice Roller</h1>
-          <div class="controls__quantity">
-            <h1 class="controls__amountLabel">Amount:</h1>
-            <button id="remove-dice" class="controls__remove">-</button>
-            <div id="amount-dice" class="controls__amount">1</div>
-            <button id="add-dice" class="controls__add">+</button>
+          <div class="controls__field">
+            <h1 class="controls__label">Dice:</h1>
+            <div class="controls__radioField">
+              <div class="controls__radio">
+                <input
+                  name="type"
+                  class="controls__radioInput"
+                  id="#red"
+                  type="radio"
+                  value="red"
+                  checked
+                />
+                <label class="controls__radioLabel" for="#red">Red</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="type"
+                  class="controls__radioInput"
+                  id="#yellow"
+                  value="yellow"
+                  type="radio"
+                />
+                <label class="controls__radioLabel" for="#yellow">Yel</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="type"
+                  class="controls__radioInput"
+                  id="#purple"
+                  value="purple"
+                  type="radio"
+                />
+                <label class="controls__radioLabel" for="#purple">Pur</label>
+              </div>
+            </div>
+          </div>
+          <div class="controls__field">
+            <h1 class="controls__label">Amount:</h1>
+            <div class="controls__radioField">
+              <div class="controls__radio">
+                <input
+                  name="amount"
+                  class="controls__radioInput"
+                  id="#1dice"
+                  type="radio"
+                  value="1"
+                  checked
+                />
+                <label class="controls__radioLabel" for="#1dice">1</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="amount"
+                  class="controls__radioInput"
+                  id="#2dice"
+                  type="radio"
+                  value="2"
+                />
+                <label class="controls__radioLabel" for="#2dice">2</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="amount"
+                  class="controls__radioInput"
+                  id="#3dice"
+                  type="radio"
+                  value="3"
+                />
+                <label class="controls__radioLabel" for="#3dice">3</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="amount"
+                  class="controls__radioInput"
+                  id="#4dice"
+                  type="radio"
+                  value="4"
+                />
+                <label class="controls__radioLabel" for="#4dice">4</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="amount"
+                  class="controls__radioInput"
+                  id="#5dice"
+                  type="radio"
+                  value="5"
+                />
+                <label class="controls__radioLabel" for="#5dice">5</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="amount"
+                  class="controls__radioInput"
+                  id="#6dice"
+                  type="radio"
+                  value="6"
+                />
+                <label class="controls__radioLabel" for="#6dice">6</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="amount"
+                  class="controls__radioInput"
+                  id="#7dice"
+                  type="radio"
+                  value="7"
+                />
+                <label class="controls__radioLabel" for="#7dice">7</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="amount"
+                  class="controls__radioInput"
+                  id="#8dice"
+                  type="radio"
+                  value="8"
+                />
+                <label class="controls__radioLabel" for="#8dice">8</label>
+              </div>
+            </div>
+          </div>
+          <div class="controls__field">
+            <h1 class="controls__label">Dice:</h1>
+            <div class="controls__radioField">
+              <div class="controls__radio">
+                <input
+                  name="dice"
+                  class="controls__radioInput"
+                  id="#d4dice"
+                  type="radio"
+                  value="d4"
+                  checked
+                />
+                <label class="controls__radioLabel" for="#d4dice">D4</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="dice"
+                  class="controls__radioInput"
+                  id="#d6dice"
+                  value="d6"
+                  type="radio"
+                />
+                <label class="controls__radioLabel" for="#d6dice">D6</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="dice"
+                  class="controls__radioInput"
+                  id="#d8dice"
+                  value="d8"
+                  type="radio"
+                />
+                <label class="controls__radioLabel" for="#d8dice">D8</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="dice"
+                  class="controls__radioInput"
+                  id="#d10dice"
+                  type="radio"
+                  value="d10"
+                />
+                <label class="controls__radioLabel" for="#d10dice">D10</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="dice"
+                  class="controls__radioInput"
+                  id="#d12dice"
+                  type="radio"
+                  value="d12"
+                />
+                <label class="controls__radioLabel" for="#d12dice">D12</label>
+              </div>
+              <div class="controls__radio">
+                <input
+                  name="dice"
+                  class="controls__radioInput"
+                  id="#d20dice"
+                  type="radio"
+                  value="d20"
+                />
+                <label class="controls__radioLabel" for="#d20dice">D20</label>
+              </div>
+            </div>
           </div>
           <button id="create-dice" class="controls__create btn-home">
             Roll

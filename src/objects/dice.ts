@@ -8,33 +8,102 @@ export type DicesArray = {
   mesh: THREE.Mesh;
 }[];
 
+export type Dice = THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
+
+export type DicesAndShapesType = {
+  [key: string]: {
+    [key: string]: {
+      mesh: Dice;
+    };
+  };
+};
+
 const gtlfLoader = new GLTFLoader();
+const redDices = await gtlfLoader.loadAsync("/models/red_dices/scene.glb");
+const yellowDices = await gtlfLoader.loadAsync(
+  "/models/yellow_dices/scene.glb"
+);
+const purpleDices = await gtlfLoader.loadAsync(
+  "/models/purple_dices/scene.glb"
+);
 
-export const addDice = (amountDiceButton: HTMLElement | null) => {
-  if (amountDiceButton) {
-    const amount = amountDiceButton?.innerHTML;
-    amountDiceButton.innerHTML = (
-      Number(amount) >= 8 ? 8 : Number(amount) + 1
-    ).toString();
-  }
+const dicesAndShapes: DicesAndShapesType = {
+  red: {
+    d4: {
+      mesh: redDices.scene.children[0] as Dice,
+    },
+    d6: {
+      mesh: redDices.scene.children[1] as Dice,
+    },
+    d8: {
+      mesh: redDices.scene.children[2] as Dice,
+    },
+    d10: {
+      mesh: redDices.scene.children[3] as Dice,
+    },
+    d12: {
+      mesh: redDices.scene.children[4] as Dice,
+    },
+    d20: {
+      mesh: redDices.scene.children[5] as Dice,
+    },
+  },
+  yellow: {
+    d4: {
+      mesh: yellowDices.scene.children[0] as Dice,
+    },
+    d6: {
+      mesh: yellowDices.scene.children[1] as Dice,
+    },
+    d8: {
+      mesh: yellowDices.scene.children[2] as Dice,
+    },
+    d10: {
+      mesh: yellowDices.scene.children[3] as Dice,
+    },
+    d12: {
+      mesh: yellowDices.scene.children[4] as Dice,
+    },
+    d20: {
+      mesh: yellowDices.scene.children[5] as Dice,
+    },
+  },
+  purple: {
+    d4: {
+      mesh: purpleDices.scene.children[0] as Dice,
+    },
+    d6: {
+      mesh: purpleDices.scene.children[1] as Dice,
+    },
+    d8: {
+      mesh: purpleDices.scene.children[2] as Dice,
+    },
+    d10: {
+      mesh: purpleDices.scene.children[3] as Dice,
+    },
+    d12: {
+      mesh: purpleDices.scene.children[4] as Dice,
+    },
+    d20: {
+      mesh: purpleDices.scene.children[5] as Dice,
+    },
+  },
 };
 
-export const removeDice = (amountDiceButton: HTMLElement | null) => {
-  if (amountDiceButton) {
-    const amount = amountDiceButton?.innerHTML;
-    amountDiceButton.innerHTML = (
-      Number(amount) <= 1 ? 1 : Number(amount) - 1
-    ).toString();
-  }
-};
-
-export const createD20Body = async (diceMesh: THREE.Mesh) => {
+const createDiceShape = (diceMesh: THREE.Mesh) => {
   const diceShape = cannonU.CreateTriMesh(diceMesh, {
-    x: 0.26,
-    y: 0.26,
-    z: 0.26,
+    x: 0.21,
+    y: 0.21,
+    z: 0.21,
   });
 
+  return diceShape;
+};
+
+export const createBody = async (
+  diceMesh: THREE.Mesh,
+  diceShape: CANNON.Shape
+) => {
   const diceBody = new CANNON.Body({
     mass: 1,
     shape: diceShape,
@@ -59,7 +128,7 @@ export const createD20Body = async (diceMesh: THREE.Mesh) => {
 
   diceBody.velocity = new CANNON.Vec3(
     (Math.random() - 0.5) * 6,
-    0,
+    Math.random() * -12,
     (Math.random() - 0.5) * 6
   );
 
@@ -82,18 +151,29 @@ export const createD20Body = async (diceMesh: THREE.Mesh) => {
   return diceBody;
 };
 
-export const createD20 = async (
+export const createDices = async (
   scene: THREE.Scene,
-  amountDiceButton: HTMLElement | null,
+  amount: number,
   world: CANNON.World,
   defaultMaterial: CANNON.Material
 ) => {
-  const amount = Number(amountDiceButton?.innerHTML) || 1;
+  const typeInput = document.querySelector(
+    'input[name="type"]:checked'
+  ) as HTMLInputElement;
+  const type = typeInput.value;
+
+  const diceInput = document.querySelector(
+    'input[name="dice"]:checked'
+  ) as HTMLInputElement;
+  const dice = diceInput.value;
+
   let dices: { body: CANNON.Body; mesh: THREE.Mesh }[] = [];
 
-  const result = await gtlfLoader.loadAsync("/models/d20_black/scene.gltf");
-  const diceMesh =
-    result.scene.children[0].children[0].children[0].children[0].children[0];
+  const diceMesh = dicesAndShapes[type][dice].mesh;
+  diceMesh.material.metalness = 0.5;
+  diceMesh.scale.setScalar(0.8);
+
+  const diceShape = createDiceShape(diceMesh);
 
   for (let i = 0; i < amount; i++) {
     const diceClone = diceMesh.clone();
@@ -102,10 +182,12 @@ export const createD20 = async (
     diceClone.position.y = 12;
 
     diceClone.castShadow = true;
-    diceClone.receiveShadow = true;
     scene.add(diceClone);
 
-    const diceBody = await createD20Body(diceClone as THREE.Mesh);
+    const diceBody = await createBody(
+      diceClone as THREE.Mesh,
+      diceShape as CANNON.Shape
+    );
     diceBody.material = defaultMaterial;
 
     world.addBody(diceBody);

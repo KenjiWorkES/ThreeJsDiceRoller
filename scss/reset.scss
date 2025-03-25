@@ -1,0 +1,19 @@
+@import "./variables.scss";
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  font-family: "Draconis", sans-serif;
+  color: #07020d;
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 62.5%;
+}

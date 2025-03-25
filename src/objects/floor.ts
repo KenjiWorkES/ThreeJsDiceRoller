@@ -22,7 +22,7 @@ const createFloorMesh = () => {
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(100, 100),
     new THREE.MeshStandardMaterial({
-      color: "#424874",
+      color: "#07020D",
       transparent: true,
       alphaMap: floorAlphaTexture,
     })
