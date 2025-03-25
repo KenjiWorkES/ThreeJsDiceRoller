@@ -23,26 +23,28 @@
     <div id="app">
       <canvas id="webgl-canva"></canvas>
       <div class="content" id="content">
-        <div class="content__toggle">
-          <button id="open" class="content__toggleButton">
-            <img
-              class="content__toggleIcon"
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABaUlEQVR4nO3Yy0rDYBCG4VdcGUGraKnWhVUXHq7cheDe80KstVhPeAStZpHehSIkkEXVZmbz/TEfzAU8/O1MZqBKFdlEwA7wCqwTMGIP+ExrAGwSIGI/h8hjNggIcTAEkVUSAiYCDn9BZBUDa4hmckREHrOKYHYLILJ6B1qIZdsA+a4+sIxQJn7oVEG+TPRHx/o3mL7azywq2MHkMUdGzAvQRGy2HBsxz4qYEwdmkZJgntQwU0DbiHkEFhDKdNkw50bMA9BADNMpC6bmwFwDcwhlFugZMV1gDKFOdmqExMA4Iv+TMyNiAGwROCJROSt5ZkmicoGpOWZIrHJ58SA+lBAdB0LibDQDXDj2+FIgVhDIfPopYd3bWyqIm9ARdQfiTeWCUgduHfv5EiVANBFJz7HCSh0X2sZtT2oPz2ZGN+SXsLRdyZcoigkCkccM62D3aheQUdvxXQ5xlQKDTAO4TNdaqfNNlSr48wUOEifEUnkwowAAAABJRU5ErkJggg=="
-              alt="chevron-right"
-            />
-          </button>
-          <button id="close" class="content__toggleButton">
-            <img
-              id="close"
-              class="content__toggleIcon"
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABg0lEQVR4nO3ZSUtCURiH8YcCo4S0UW3Apk3jqr5x+6aNNJi7tLR5HsjaNEFfwbhwBBcl9t7N/1x84F0K/jjnej0caNcucsWAVeAEyOIxYg2ouXkBJvEQsd6AqE8VmMAjxMYvCK8wMWCzCaI+D8AoonUBWy0gam7uFTHdQO4fiJqbG7eKMohtA6IGfAFxBOoBdoyIb2AFEcRuCMQyIog9I+ITWCICiEUECh7MvBHxoYTYD4FYQKB4VBAFI+IdmEegBHAQAjGH54g3JUQxBGIWgZJAyYh4BWaIAGIakQpGRHDqm0KonBESnCsyCNUb4pfqDhhBDFM0Ym7VViYRAhNsszRimFJUMEng0Ii5BlKIYY6MmDNgkIhgToEBhOoDykbMiSKmEhXMEHBuxBwD/YhhLqKCGQ6BqbhtKoW5NGLKapi0e5NbMHnEyrg/jJa3v1wp98W8PYxZtlnVhxveMeCxCeLZh8vQeuN/YLxCNGKe1C8/Wy3rVuZK7TxvqRPoMH2yHdr9AGyaJ7dcjvrWAAAAAElFTkSuQmCC"
-              alt="chevron-left"
-            />
-          </button>
-        </div>
         <div class="controls">
-          <h1 class="controls__title">RPG Dice Roller</h1>
-          <div class="controls__field">
+          <div class="controls__header">
+            <h1 class="controls__title">RPG Dice Roller</h1>
+            <div class="controls__toggle">
+              <button id="close" class="controls__toggleButton">
+                <img
+                  class="controls__toggleIcon"
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABHElEQVR4nO3SMSiFYRSA4QcRiZSUUpSyKIvBYDKYLBYWk81iNNnvZLTYTBYWi8lgMhgsyqIUpZSUSES4Ur+SIpf/3vvdnKfOeOq8fR8hhBBCCCGEEHJXQDHxKfw0ZimBY4tfzHIpr1KHlQSOLn6aVdSX+sXeFtYSOL6YzQYa/NLb4noCEZto9EdN2KpixDaa5aQFO1WI2EWrnLVjr4IRe2hTJh3Yr0DEATqVWRcOyxhxhG4V0oPjMkScok+F9eIkx4gz9KuSAZznEHGBQVU2hMs/RFxhWCJGcPOLiOtsNymjuC0h4g5jEjWO+x9EPGBC4ibx+E3EE6bViKns4M8Rz5hRY2azw98jXjCnRs1/CFlQ4xazCSGEEEL4b14BnfLMQvEtlakAAAAASUVORK5CYII="
+                  alt="sort-down"
+                />
+              </button>
+              <button id="open" class="controls__toggleButton">
+                <img
+                  class="controls__toggleIcon"
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABPElEQVR4nO3QPyiFURzG8S8iN5GSUopSFmUxGEwGk8XCYrJZjHeym4wWm8nCYjEZTAaDRVmUopSSEokIR2/9Tt3kz3vvff+cU8+nnvHt/X0PiIiIiIgEYNUWtRXA2apEagn4qAn5BJaJzDzwXhPhl4QtEok54O2HCL8kcIHAzQAvf0T4vQKzBGoKeEoR4fcMTBOYSeCxjgi/B/s2COPAXQMRfvfARNkRo8BNExF+t8BYWRFDwGUGEX7XwEjREYPARYYRflfAcFER/cBZDhF+58BA3hG9wEmOEc52CvTlFdEDHBcQ4WzJv7qzjqgAhwVGONsR0JVVRAewX0KEsx0Anc1GtAE7JUY42x7Q3mhEK7AdQISz7drD1qUF2AzgePdtW/bAqa0HcLT7ZRtpI9YCONb9s+RGEREREREhal+yf8xCb2TVZgAAAABJRU5ErkJggg=="
+                  alt="sort-up"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="controls__field" id="field-type">
             <h1 class="controls__label">Dice:</h1>
             <div class="controls__radioField">
               <div class="controls__radio">
@@ -78,7 +80,7 @@
               </div>
             </div>
           </div>
-          <div class="controls__field">
+          <div class="controls__field" id="field-amount">
             <h1 class="controls__label">Amount:</h1>
             <div class="controls__radioField">
               <div class="controls__radio">
@@ -164,7 +166,7 @@
               </div>
             </div>
           </div>
-          <div class="controls__field">
+          <div class="controls__field" id="field-dice">
             <h1 class="controls__label">Dice:</h1>
             <div class="controls__radioField">
               <div class="controls__radio">

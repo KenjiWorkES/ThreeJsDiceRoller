@@ -8,15 +8,25 @@
   padding: 1.6rem;
   left: 0;
   transition: 0.3s;
+}
+
+.controls {
+  width: 100%;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 999;
+  row-gap: 1.5rem;
+  background-color: #eef0f2;
+  padding: 2rem;
+  border-radius: 1rem;
+  align-items: center;
 
   &__toggle {
-    position: absolute;
-    top: 30px;
-    right: 0;
-    width: 6rem;
-    height: 6rem;
     background-color: $white;
     font-size: 3rem;
+    margin-top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,29 +43,22 @@
   }
 
   &__toggleIcon {
-    width: 4rem;
+    width: 3rem;
   }
 
   #open {
     display: none;
   }
-}
 
-.controls {
-  width: 100%;
-  max-width: 40rem;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 999;
-  row-gap: 1.5rem;
-  background-color: #eef0f2;
-  padding: 2rem;
-  border-radius: 1rem;
-  align-items: center;
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   &__title {
-    font-size: 6rem;
+    font-size: 5rem;
     font-weight: normal;
     width: 100%;
   }

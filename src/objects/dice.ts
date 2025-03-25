@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import * as CANNON from "cannon-es";
-import { GLTFLoader } from "three/examples/jsm/Addons.js";
+import { GLTFLoader, BufferGeometryUtils } from "three/examples/jsm/Addons.js";
 import cannonU from "cannon-utils";
 
 export type DicesArray = {
@@ -94,6 +94,27 @@ export const createDiceObj = async () => {
   };
 };
 
+function getPolyhedronShape(mesh: THREE.Mesh) {
+  let geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", mesh.geometry.getAttribute("position"));
+
+  geometry = BufferGeometryUtils.mergeVertices(geometry);
+
+  const position = geometry.attributes.position.array;
+  const index = geometry.index.array;
+
+  const points = [];
+  for (let i = 0; i < position.length; i += 3) {
+    points.push(new CANNON.Vec3(position[i], position[i + 1], position[i + 2]));
+  }
+  const faces = [];
+  for (let i = 0; i < index.length; i += 3) {
+    faces.push([index[i], index[i + 1], index[i + 2]]);
+  }
+
+  return new CANNON.ConvexPolyhedron({ vertices: points, faces });
+}
+
 const createDiceShape = (diceMesh: THREE.Mesh) => {
   const diceShape = cannonU.CreateTriMesh(diceMesh, {
     x: 0.21,
@@ -177,7 +198,8 @@ export const createDices = async (
   diceMesh.material.metalness = 0.5;
   diceMesh.scale.setScalar(0.8);
 
-  const diceShape = createDiceShape(diceMesh);
+  //const diceShape = createDiceShape(diceMesh);
+  const diceShape = getPolyhedronShape(diceMesh);
 
   for (let i = 0; i < amount; i++) {
     const diceClone = diceMesh.clone();

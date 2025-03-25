@@ -6,6 +6,7 @@ import {
   createDiceObj,
   createDices,
   createFloor,
+  createDiceTable,
   type DicesArray,
 } from "./objects";
 import { createSky } from "./sky";
@@ -19,21 +20,30 @@ createDiceObj();
 
 const openButon = document.getElementById("open");
 const closeButon = document.getElementById("close");
-const content = document.getElementById("content");
+
+const fieldType = document.getElementById("field-type");
+const fieldAmount = document.getElementById("field-amount");
+const fieldDice = document.getElementById("field-dice");
 
 openButon?.addEventListener("click", () => {
-  if (closeButon && openButon && content) {
-    content.style.left = "0";
+  if (closeButon && openButon && fieldType && fieldAmount && fieldDice) {
     closeButon.style.display = "block";
     openButon.style.display = "none";
+
+    fieldDice.style.display = "block";
+    fieldAmount.style.display = "block";
+    fieldType.style.display = "block";
   }
 });
 
 closeButon?.addEventListener("click", () => {
-  if (closeButon && openButon && content) {
-    content.style.left = "-41.6rem";
+  if (closeButon && openButon && fieldType && fieldAmount && fieldDice) {
     openButon.style.display = "block";
     closeButon.style.display = "none";
+
+    fieldDice.style.display = "none";
+    fieldAmount.style.display = "none";
+    fieldType.style.display = "none";
   }
 });
 
@@ -66,6 +76,8 @@ world.allowSleep = true;
 
 const sky = createSky();
 scene.add(sky);
+
+createDiceTable(scene, world);
 
 const canvas = document.getElementById("webgl-canva");
 const createDiceButton = document.getElementById("create-dice");
