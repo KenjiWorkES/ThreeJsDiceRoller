@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import * as CANNON from "cannon-es";
-import { GLTFLoader, BufferGeometryUtils } from "three/examples/jsm/Addons.js";
+import { GLTFLoader } from "three/examples/jsm/Addons.js";
 import cannonU from "cannon-utils";
 
 export type DicesArray = {
