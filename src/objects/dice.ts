@@ -18,76 +18,80 @@ export type DicesAndShapesType = {
   };
 };
 
-const gtlfLoader = new GLTFLoader();
-const redDices = await gtlfLoader.loadAsync("/models/red_dices/scene.glb");
-const yellowDices = await gtlfLoader.loadAsync(
-  "/models/yellow_dices/scene.glb"
-);
-const purpleDices = await gtlfLoader.loadAsync(
-  "/models/purple_dices/scene.glb"
-);
+let dicesAndShapes: DicesAndShapesType = {};
 
-const dicesAndShapes: DicesAndShapesType = {
-  red: {
-    d4: {
-      mesh: redDices.scene.children[0] as Dice,
+export const createDiceObj = async () => {
+  const gtlfLoader = new GLTFLoader();
+  const redDices = await gtlfLoader.loadAsync("/models/red_dices/scene.glb");
+  const yellowDices = await gtlfLoader.loadAsync(
+    "/models/yellow_dices/scene.glb"
+  );
+  const purpleDices = await gtlfLoader.loadAsync(
+    "/models/purple_dices/scene.glb"
+  );
+
+  dicesAndShapes = {
+    red: {
+      d4: {
+        mesh: redDices.scene.children[0] as Dice,
+      },
+      d6: {
+        mesh: redDices.scene.children[1] as Dice,
+      },
+      d8: {
+        mesh: redDices.scene.children[2] as Dice,
+      },
+      d10: {
+        mesh: redDices.scene.children[3] as Dice,
+      },
+      d12: {
+        mesh: redDices.scene.children[4] as Dice,
+      },
+      d20: {
+        mesh: redDices.scene.children[5] as Dice,
+      },
     },
-    d6: {
-      mesh: redDices.scene.children[1] as Dice,
+    yellow: {
+      d4: {
+        mesh: yellowDices.scene.children[0] as Dice,
+      },
+      d6: {
+        mesh: yellowDices.scene.children[1] as Dice,
+      },
+      d8: {
+        mesh: yellowDices.scene.children[2] as Dice,
+      },
+      d10: {
+        mesh: yellowDices.scene.children[3] as Dice,
+      },
+      d12: {
+        mesh: yellowDices.scene.children[4] as Dice,
+      },
+      d20: {
+        mesh: yellowDices.scene.children[5] as Dice,
+      },
     },
-    d8: {
-      mesh: redDices.scene.children[2] as Dice,
+    purple: {
+      d4: {
+        mesh: purpleDices.scene.children[0] as Dice,
+      },
+      d6: {
+        mesh: purpleDices.scene.children[1] as Dice,
+      },
+      d8: {
+        mesh: purpleDices.scene.children[2] as Dice,
+      },
+      d10: {
+        mesh: purpleDices.scene.children[3] as Dice,
+      },
+      d12: {
+        mesh: purpleDices.scene.children[4] as Dice,
+      },
+      d20: {
+        mesh: purpleDices.scene.children[5] as Dice,
+      },
     },
-    d10: {
-      mesh: redDices.scene.children[3] as Dice,
-    },
-    d12: {
-      mesh: redDices.scene.children[4] as Dice,
-    },
-    d20: {
-      mesh: redDices.scene.children[5] as Dice,
-    },
-  },
-  yellow: {
-    d4: {
-      mesh: yellowDices.scene.children[0] as Dice,
-    },
-    d6: {
-      mesh: yellowDices.scene.children[1] as Dice,
-    },
-    d8: {
-      mesh: yellowDices.scene.children[2] as Dice,
-    },
-    d10: {
-      mesh: yellowDices.scene.children[3] as Dice,
-    },
-    d12: {
-      mesh: yellowDices.scene.children[4] as Dice,
-    },
-    d20: {
-      mesh: yellowDices.scene.children[5] as Dice,
-    },
-  },
-  purple: {
-    d4: {
-      mesh: purpleDices.scene.children[0] as Dice,
-    },
-    d6: {
-      mesh: purpleDices.scene.children[1] as Dice,
-    },
-    d8: {
-      mesh: purpleDices.scene.children[2] as Dice,
-    },
-    d10: {
-      mesh: purpleDices.scene.children[3] as Dice,
-    },
-    d12: {
-      mesh: purpleDices.scene.children[4] as Dice,
-    },
-    d20: {
-      mesh: purpleDices.scene.children[5] as Dice,
-    },
-  },
+  };
 };
 
 const createDiceShape = (diceMesh: THREE.Mesh) => {

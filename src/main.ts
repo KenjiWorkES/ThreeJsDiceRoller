@@ -2,7 +2,12 @@ import * as THREE from "three";
 import * as CANNON from "cannon-es";
 import GUI from "lil-gui";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-import { createDices, createFloor, type DicesArray } from "./objects";
+import {
+  createDiceObj,
+  createDices,
+  createFloor,
+  type DicesArray,
+} from "./objects";
 import { createSky } from "./sky";
 import { createMainCamera } from "./camera";
 import { createSceneLights } from "./lights";
@@ -10,6 +15,7 @@ import { createDefaultContactMaterial } from "./physics";
 //import CannonDebugger from "cannon-es-debugger";
 
 let allDices: DicesArray = [];
+createDiceObj();
 
 const openButon = document.getElementById("open");
 const closeButon = document.getElementById("close");
