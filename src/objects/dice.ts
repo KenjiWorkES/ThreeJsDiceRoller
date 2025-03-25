@@ -94,7 +94,7 @@ export const createDiceObj = async () => {
   };
 };
 
-function getPolyhedronShape(mesh: THREE.Mesh) {
+/*function getPolyhedronShape(mesh: THREE.Mesh) {
   let geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", mesh.geometry.getAttribute("position"));
 
@@ -113,7 +113,7 @@ function getPolyhedronShape(mesh: THREE.Mesh) {
   }
 
   return new CANNON.ConvexPolyhedron({ vertices: points, faces });
-}
+}*/
 
 const createDiceShape = (diceMesh: THREE.Mesh) => {
   const diceShape = cannonU.CreateTriMesh(diceMesh, {
@@ -198,8 +198,8 @@ export const createDices = async (
   diceMesh.material.metalness = 0.5;
   diceMesh.scale.setScalar(0.8);
 
-  //const diceShape = createDiceShape(diceMesh);
-  const diceShape = getPolyhedronShape(diceMesh);
+  const diceShape = createDiceShape(diceMesh);
+  //const diceShape = getPolyhedronShape(diceMesh);
 
   for (let i = 0; i < amount; i++) {
     const diceClone = diceMesh.clone();

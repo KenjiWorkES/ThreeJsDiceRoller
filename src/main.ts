@@ -6,7 +6,6 @@ import {
   createDiceObj,
   createDices,
   createFloor,
-  createDiceTable,
   type DicesArray,
 } from "./objects";
 import { createSky } from "./sky";
@@ -16,7 +15,6 @@ import { createDefaultContactMaterial } from "./physics";
 //import CannonDebugger from "cannon-es-debugger";
 
 let allDices: DicesArray = [];
-createDiceObj();
 
 const openButon = document.getElementById("open");
 const closeButon = document.getElementById("close");
@@ -24,6 +22,8 @@ const closeButon = document.getElementById("close");
 const fieldType = document.getElementById("field-type");
 const fieldAmount = document.getElementById("field-amount");
 const fieldDice = document.getElementById("field-dice");
+
+createDiceObj();
 
 openButon?.addEventListener("click", () => {
   if (closeButon && openButon && fieldType && fieldAmount && fieldDice) {
@@ -76,8 +76,6 @@ world.allowSleep = true;
 
 const sky = createSky();
 scene.add(sky);
-
-createDiceTable(scene, world);
 
 const canvas = document.getElementById("webgl-canva");
 const createDiceButton = document.getElementById("create-dice");
