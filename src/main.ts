@@ -7,9 +7,29 @@ import { createSky } from "./sky";
 import { createMainCamera } from "./camera";
 import { createSceneLights } from "./lights";
 import { createDefaultContactMaterial } from "./physics";
-import CannonDebugger from "cannon-es-debugger";
+//import CannonDebugger from "cannon-es-debugger";
 
 let allDices: DicesArray = [];
+
+const openButon = document.getElementById("open");
+const closeButon = document.getElementById("close");
+const content = document.getElementById("content");
+
+openButon?.addEventListener("click", () => {
+  if (closeButon && openButon && content) {
+    content.style.left = "0";
+    closeButon.style.display = "block";
+    openButon.style.display = "none";
+  }
+});
+
+closeButon?.addEventListener("click", () => {
+  if (closeButon && openButon && content) {
+    content.style.left = "-41.6rem";
+    openButon.style.display = "block";
+    closeButon.style.display = "none";
+  }
+});
 
 const sizes = {
   height: window.innerHeight,
@@ -31,7 +51,7 @@ if (window.location.hash) {
 
 const scene = new THREE.Scene();
 const world = new CANNON.World();
-const cannonDebugger = new CannonDebugger(scene, world);
+//const cannonDebugger = new CannonDebugger(scene, world);
 
 world.gravity.set(0, -9.82, 0);
 world.addContactMaterial(defaultContactMaterial);
@@ -124,7 +144,7 @@ const tick = () => {
 
   // Update controls
   controls.update();
-  cannonDebugger.update();
+  //cannonDebugger.update();
 
   // Render
   renderer.render(scene, camera);

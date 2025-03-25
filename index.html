@@ -16,7 +16,24 @@
   <body>
     <div id="app">
       <canvas id="webgl-canva"></canvas>
-      <div class="content">
+      <div class="content" id="content">
+        <div class="content__toggle">
+          <button id="open" class="content__toggleButton">
+            <img
+              class="content__toggleIcon"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABaUlEQVR4nO3Yy0rDYBCG4VdcGUGraKnWhVUXHq7cheDe80KstVhPeAStZpHehSIkkEXVZmbz/TEfzAU8/O1MZqBKFdlEwA7wCqwTMGIP+ExrAGwSIGI/h8hjNggIcTAEkVUSAiYCDn9BZBUDa4hmckREHrOKYHYLILJ6B1qIZdsA+a4+sIxQJn7oVEG+TPRHx/o3mL7azywq2MHkMUdGzAvQRGy2HBsxz4qYEwdmkZJgntQwU0DbiHkEFhDKdNkw50bMA9BADNMpC6bmwFwDcwhlFugZMV1gDKFOdmqExMA4Iv+TMyNiAGwROCJROSt5ZkmicoGpOWZIrHJ58SA+lBAdB0LibDQDXDj2+FIgVhDIfPopYd3bWyqIm9ARdQfiTeWCUgduHfv5EiVANBFJz7HCSh0X2sZtT2oPz2ZGN+SXsLRdyZcoigkCkccM62D3aheQUdvxXQ5xlQKDTAO4TNdaqfNNlSr48wUOEifEUnkwowAAAABJRU5ErkJggg=="
+              alt="chevron-right"
+            />
+          </button>
+          <button id="close" class="content__toggleButton">
+            <img
+              id="close"
+              class="content__toggleIcon"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABg0lEQVR4nO3ZSUtCURiH8YcCo4S0UW3Apk3jqr5x+6aNNJi7tLR5HsjaNEFfwbhwBBcl9t7N/1x84F0K/jjnej0caNcucsWAVeAEyOIxYg2ouXkBJvEQsd6AqE8VmMAjxMYvCK8wMWCzCaI+D8AoonUBWy0gam7uFTHdQO4fiJqbG7eKMohtA6IGfAFxBOoBdoyIb2AFEcRuCMQyIog9I+ITWCICiEUECh7MvBHxoYTYD4FYQKB4VBAFI+IdmEegBHAQAjGH54g3JUQxBGIWgZJAyYh4BWaIAGIakQpGRHDqm0KonBESnCsyCNUb4pfqDhhBDFM0Ym7VViYRAhNsszRimFJUMEng0Ii5BlKIYY6MmDNgkIhgToEBhOoDykbMiSKmEhXMEHBuxBwD/YhhLqKCGQ6BqbhtKoW5NGLKapi0e5NbMHnEyrg/jJa3v1wp98W8PYxZtlnVhxveMeCxCeLZh8vQeuN/YLxCNGKe1C8/Wy3rVuZK7TxvqRPoMH2yHdr9AGyaJ7dcjvrWAAAAAElFTkSuQmCC"
+              alt="chevron-left"
+            />
+          </button>
+        </div>
         <div class="controls">
           <h1 class="controls__title">RPG Dice Roller</h1>
           <div class="controls__field">
